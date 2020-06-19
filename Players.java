@@ -1,9 +1,9 @@
 
 /**
- * Super class for human and ai. Serve as a template to be overrided by childclasses
+ * Write a description of class Players here.
  *
- * @author (MITWannabe(Not on Github) and NocaToca AKA FoxGirl/AIenthusiast)
- * @version 6/10/2020
+ * @author (your name)
+ * @version (a version number or a date)
  */
 public class Players
 {
@@ -23,7 +23,6 @@ public class Players
     public String getPlayerType(){
     
         return playerType;
-        //return String variable Playertype.
     
     }
 }

@@ -4,10 +4,12 @@ import java.util.Scanner;
 import java.util.*;
 /**
  * Write a description of class TikTacToe here.
- *  
+ *  I finished half the tutorial. https://www.youtube.com/watch?v=gQb3dE-y1S4&t=1590s
+ *  I stopped at 15:08. Would you finish it up, so we could start working on some AI stuff?
+ *  We got this!! :D :D
  *
  * @author (MITWannabe and FoxGirl/AIenthusiast)
- * @version 6/10/2020
+ * @version (Friday Apparently)
  */
 public class TikTacToe
 {
@@ -21,12 +23,11 @@ public class TikTacToe
 
     public static void main(String[] args) {
         //Builds a 2D array game board.
-        //validates input for user prompt, user location
+        //validates input, checking if it meet the criteria of int 1-9
         //play player and AI
         //Build board
-        //Depends on the user's choice, the if statements will start a while loop containing the chosen type game.
-        //Each game loops till gameover is true. Turn is based on a counter that changes from odd to even.
-        //For ever turn, the move is validated, placed on correct location, and check whether it meets winning condition.
+        /*When the program first prints, the board is slightly messed up; however that disapears
+        on the second and third trial*/
 
         char [] [] Board = {{' ', '|', ' ', '|', ' '},
                 {'-', '*', '-', '*', '-'},
@@ -38,11 +39,6 @@ public class TikTacToe
 
         System.out.println("1 for Player v.s. Player, 2 for Player v.s. AI");
         int num = input.nextInt();
-        while (num != 1 && num != 2) {
-            System.out.println("Invalid! Choose 1 or 2!");
-            num = input.nextInt();
-        }
-        
         boolean gameOver = false;
 
         Players player1;
@@ -56,7 +52,7 @@ public class TikTacToe
             //  Player1 or Player2 Input
             player1 = new Human(1);
             player2 = new Human(2);
-            while (gameOver == false) {
+            while (gameOver = false) {
                 if(k % 2 != 0) {//player1.play
                     loc = player1.pickLoc(Board);
                     validate(input, player1.getPlayerType());
@@ -79,26 +75,19 @@ public class TikTacToe
             System.out.println("PvE!");
             System.out.println("1 for Player First, 2 for AI First");
             int n = input.nextInt();
-            while (n != 1 && n != 2) {
-            System.out.println("Invalid! Choose 1 or 2!");
-            n = input.nextInt();
-            }
 
             if(n == 1){
 
                 //Player First
                 System.out.println("PvE!P1!");
                 player1 = new Human(1);
-                //player1 = new AI(); debug
                 player2 = new AI();
                 
                     while (gameOver == false) {
                         if(k % 2 != 0) {//player1.play
                             loc = player1.pickLoc(Board);
                             validate(input, player1.getPlayerType());
-                            //play(Board, loc, "player1", false); 
-                            play(Board, loc, "player1", false);
-                            //gameOver = checkWinner("AI1"); debug
+                            play(Board, loc, "player1", false); 
                             gameOver = checkWinner("player");
                             buildBoard(Board);
                         }
@@ -107,7 +96,6 @@ public class TikTacToe
                             validate(input, player2.getPlayerType());
                             play(Board, loc, "AI", false); 
                             gameOver = checkWinner("AI");
-                            //gameOver = checkWinner("AI2"); debug
                             buildBoard(Board);
                         }
                         k++;
@@ -130,7 +118,7 @@ public class TikTacToe
                         else {
                             loc = player2.pickLoc(Board);
                             validate(input, player2.getPlayerType());
-                            play(Board, loc, "player1", false); 
+                            play(Board, loc, "player2", false); 
                             gameOver = checkWinner("player");
                             buildBoard(Board);
                         }
@@ -144,17 +132,17 @@ public class TikTacToe
         }
 
         boolean cont = true;
-        while(cont == true){
-            //Replay prompts and code
+        while(cont = true){
+
             System.out.println("Play new game? Yes/No");
-            String ans = input.next();
-            if(ans.equals("Yes") || ans.equals("yes")){
+            String answer = input.nextLine();
+            if(answer.equals("Yes") || answer.equals("yes")){
                 
                 cont = false;
                 TikTacToe newGame = new TikTacToe();
                 newGame.main(args);
 
-            } else if(ans.equals("No") || ans.equals("no")){
+            } else if(answer.equals("No") || answer.equals("no")){
                 cont = false;
                 return;
             } else {
@@ -164,7 +152,7 @@ public class TikTacToe
     }
     /**
      * While loop to check if the location is valid either by number or by the spot already having something in it. Asks for another one if it's wrong
-     * 
+     * player = 1 : Player; player = 2: AI or Player 2
      */
     public static void validate(Scanner input, String player) {
         if(player.equals("Human")) {   
@@ -201,16 +189,12 @@ public class TikTacToe
          */
         char token = ' '; //This is the token char that is to be edited based on the player
 
-        if (player.equals("player1")) {
+        if (!player.equals("AI")) {
             token = 'X'; //Players are Xs
             if(!simulation){
                 playerPos.add(loc); //Adds the location used to the positions that the player put
             }
-        } else if (player.equals("player2")) {
-            token = 'O'; 
-            if(!simulation) {
-                AIPos.add(loc);//Adds the location used to the positions that the player put
-            }
+
         } else {
             token = 'O'; //AI's are Os for oranges
             if(!simulation){
@@ -219,8 +203,16 @@ public class TikTacToe
 
         }
         //Check player or AI
-        
-        
+        //If the user inputs 1-9, put it to the desinated location on the board with correct token
+        //Mike your comments are bad bc I'm too dumb to understand them. But this switch basically puts a the token that's an X or an O at the relative spot
+        //For reference:
+        /*
+        1|2|3
+        -*-*-
+        4|5|6
+        -*-*-
+        7|8|9
+         */
         switch(loc) {
             case 1:
             Board[0][0] = token;
@@ -294,33 +286,32 @@ public class TikTacToe
 
             if(playerPos.containsAll(l)){
                 //This happens if the player position has one of the win conditions, which would mean that you won! :D
-                //print win statement/ clearboards/ set gameover to true
-                System.out.println(player + " won!");
-                playerPos.clear();
-                AIPos.clear();
-                return true;
+                result = player + " won!";
+                
 
             } else if(AIPos.containsAll(l)){
                 //This happens if the AI position object has one of the win conditions, which would mean that you lost! D:
-                //print win statement/ clearboards/ set gameover to true
-                System.out.println(player + " won!");
-                playerPos.clear();
-                AIPos.clear();
-                return true;
+                result = player + " won!";
+                
 
             } 
         }
         if(playerPos.size() + AIPos.size() == 9){
             //This happens if theres no more room on the board for someone to make a move, which would make a tie! -_-
-            //print statement/ clearboards/ set gameover to true
-            System.out.println("Tie!");
-            playerPos.clear();
-            AIPos.clear();
-            return true;
+            result = "Tie!";
             
+
         }
         //Returns an empty air string if the game needs continuing. 
 
+        if(!result.equals("")){
+
+            System.out.println(result);
+            
+            return true;
+            
+
+        }
         return false;
 
     }

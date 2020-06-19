@@ -3,15 +3,15 @@ import java.util.*;
  * This is the main AI for the TikTacToe game that you play against. It uses Minimaxing to decide which move is best, and this is done by playing a simulation
  * for each possible move
  *
- * @author (MITWannabe(Not on Github) and NocaToca AKA FoxGirl/AIenthusiast)
- * @version 6/10/2020
+ * @author (MITWannabe and FoxGirl/AIenthusiast)
+ * @version (Friday Apparently)
  */
 public class AI extends Players
 {
     //Minimizing player = Human
     //Maximizing player = AI
     //MIKE: If you wanna understand Minimaxing better this is a good vide: https://www.youtube.com/watch?v=l-hh51ncgDI
-
+    
     //Empty constructor statement. This whole class is made solely for organization purpopses. 
     public AI(){
 
@@ -49,7 +49,7 @@ public class AI extends Players
                     if(score > bestScore){
                         //Debug line to print the score if its changed
                         if(debug){
-                        //System.out.println("The score is higher than the last and its: " + score + " at " + loc);
+                        System.out.println("The score is higher than the last and its: " + score + " at " + loc);
                         
                         }
 
@@ -65,7 +65,7 @@ public class AI extends Players
                     if (score == bestScore){
                         //debug statement to see how many of the same scores there are and where
                         if(debug){
-                        //System.out.println("The score is the same as the last and its: " + score + " at " + loc);
+                        System.out.println("The score is the same as the last and its: " + score + " at " + loc);
                         
                         }
                         
